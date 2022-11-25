@@ -1,4 +1,4 @@
-lexer grammar tokens;
+lexer grammar vocabulary;
 
 //data types
 REAL : 'Real' ;
