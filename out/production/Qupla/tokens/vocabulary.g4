@@ -5,19 +5,18 @@ REAL : 'Real' ;
 
 BOOL : 'Bool' ;
 
-STRING : 'String';
+STRING : 'string';
 
-TXT : '"' ([a-zA-Z]|('0'..'9')|'_'|'.'|'!'|'@'|'#'|'$'|'%'|'^'|'&'|'*'|'('|')'|'['|']')* '"';
+SEPARATOR: ';';
+
+TXT : '"' .*? '"';
 
 INT : ('0'..'9')+ ;
 HEX :  '0' ('x'|'X') ('0'..'9'|'a'..'f'|'A'..'F')+ ;
 FLOAT: [0-9]+'.'[0-9]+;
 
-//identifier
-ID : [a-zA-Z] ([a-zA-Z]|('0'..'9')|'_'|'.')* ;
-
 //white spaces
-WS : [\t]+ | [\n]+;
+WS : [ \t\r\n]+ -> skip;
 
 //operators
 PLUS : '+';
@@ -54,6 +53,10 @@ LEEQUAL : '<=';
 
 NOTEQUAL : '<>';
 
+PARENTHESIS_OPEN: '(';
+
+PARENTHESIS_CLOSE: ')';
+
 //comments
 OLCOMMENT : '%%';
 
@@ -86,6 +89,9 @@ MODULE : 'Module';
 INPUT : 'Input';
 
 OUTPUT : 'Output';
+
+//identifier
+ID : [a-zA-Z] ([a-zA-Z]|('0'..'9')|'_'|'.')* ;
 
 
 
