@@ -43,7 +43,9 @@ XOR : 'xor';
 
 REMAIN : '%';
 
-IFO : '?';
+COND_IF : '?';
+
+COND_ELSE : ':';
 
 EQUAL : '==';
 
@@ -53,14 +55,18 @@ LEEQUAL : '<=';
 
 NOTEQUAL : '<>';
 
+GREATER : '>';
+
+LESS : '<';
+
 PARENTHESIS_OPEN: '(';
 
 PARENTHESIS_CLOSE: ')';
 
 //comments
-OLCOMMENT : '%%';
+OLCOMMENT : '%% ~[\r\n]*';
 
-MLCOMMENT : '%%%';
+MLCOMMENT : '%%%'-> skip;
 
 //constant values
 TRUE : 'true';
@@ -91,7 +97,7 @@ INPUT : 'Input';
 OUTPUT : 'Output';
 
 //identifier
-ID : [a-zA-Z] ([a-zA-Z]|('0'..'9')|'_'|'.')* ;
+IDENTIFIER : [a-zA-Z] ([a-zA-Z]|('0'..'9')|'_'|'.')* ;
 
 
 
