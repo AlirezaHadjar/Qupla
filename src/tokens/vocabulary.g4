@@ -15,6 +15,12 @@ INT : ('0'..'9')+ ;
 HEX :  '0' ('x'|'X') ('0'..'9'|'a'..'f'|'A'..'F')+ ;
 FLOAT: [0-9]+'.'[0-9]+;
 
+// one line comments
+ONCOMMENT: '%%' ~[\r\n]*;
+
+// multi line comments
+MLCOMMENT: '%%%' .*? '%%%';
+
 //white spaces
 WS : [ \t\r\n]+ -> skip;
 
@@ -62,11 +68,6 @@ LESS : '<';
 PARENTHESIS_OPEN: '(';
 
 PARENTHESIS_CLOSE: ')';
-
-//comments
-OLCOMMENT : '%% ~[\r\n]*';
-
-MLCOMMENT : '%%%'-> skip;
 
 //constant values
 TRUE : 'true';

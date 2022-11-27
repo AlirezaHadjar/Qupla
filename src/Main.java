@@ -17,7 +17,7 @@ public class Main {
         try {
             String currentDirectory = System.getProperty("user.dir");
             String inputFileName = currentDirectory+"/src/"+ "InputFile.QUPLA";
-            text = new String(Files.readAllBytes(Paths.get(inputFileName)), StandardCharsets.UTF_8);
+            text = Files.readString(Paths.get(inputFileName));
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
