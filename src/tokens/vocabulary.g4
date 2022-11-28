@@ -1,11 +1,11 @@
 lexer grammar vocabulary;
 
-//data types
-REAL : 'Real' ;
+//data types in case sensitive
+REAL : [rR][eE][aA][lL] ;
 
-BOOL : 'Bool' ;
+BOOL : [bB][oO][oO][lL] ;
 
-STRING : 'string';
+STRING : [sS][tT][rR][iI][nN][gG] ;
 
 SEPARATOR: ';';
 
@@ -39,13 +39,13 @@ FAC : '!';
 
 ASSIGN : '=';
 
-AND : 'and';
+AND : [aA][nN][dD];
 
-OR : 'or';
+OR : [oO][rR];
 
-NOT : 'not';
+NOT : [nN][oO][tT];
 
-XOR : 'xor';
+XOR : [xX][oO][rR];
 
 REMAIN : '%';
 
@@ -70,32 +70,32 @@ PARENTHESIS_OPEN: '(';
 PARENTHESIS_CLOSE: ')';
 
 //constant values
-TRUE : 'true';
+TRUE : [tT][rR][uU][eE];
 
-FALSE : 'false';
+FALSE : [fF][aA][lL][sS][eE];
 
 //keywords
-IF : 'if';
+IF : [iI][fF];
 
-THEN : 'then';
+THEN : [tT][hH][eE][nN];
 
-BEGIN : 'Begin';
+ELSE : [eE][lL][sS][eE];
 
-END : 'End';
+BEGIN : [bB][eE][gG][iI][nN];
 
-WHILE : 'While';
+END : [eE][nN][dD];
 
-ELSE : 'Else';
+WHILE : [wW][hH][iI][lL][eE];
 
-READ : 'read';
+READ : [rR][eE][aA][dD];
 
-WRITE : 'write';
+WRITE : [wW][rR][iI][tT][eE];
 
-MODULE : 'Module';
+MODULE : [mM][oO][dD][uU][lL][eE];
 
-INPUT : 'Input';
+INPUT : [iI][nN][pP][uU][tT];
 
-OUTPUT : 'Output';
+OUTPUT : [oO][uU][tT][pP][uU][tT];
 
 //identifier
 IDENTIFIER : [a-zA-Z] ([a-zA-Z]|('0'..'9')|'_'|'.')* ;
