@@ -15,6 +15,12 @@ INT : ('0'..'9')+ ;
 HEX :  '0' ('x'|'X') ('0'..'9'|'a'..'f'|'A'..'F')+ ;
 FLOAT: [0-9]+'.'[0-9]+;
 
+// one line comments
+ONCOMMENT: '%%' ~[\r\n]*;
+
+// multi line comments
+MLCOMMENT: '%%%' .*? '%%%';
+
 //white spaces
 WS : [ \t\r\n]+ -> skip;
 
@@ -63,11 +69,6 @@ PARENTHESIS_OPEN: '(';
 
 PARENTHESIS_CLOSE: ')';
 
-//comments
-OLCOMMENT : '%% ~[\r\n]*';
-
-MLCOMMENT : '%%%'-> skip;
-
 //constant values
 TRUE : 'true';
 
@@ -97,7 +98,8 @@ INPUT : 'Input';
 OUTPUT : 'Output';
 
 //identifier
-IDENTIFIER : [a-zA-Z] ([a-zA-Z]|('0'..'9')|'_'|'.')* ;
+IDENTIFIER : ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'0'..'9'|'_')*;
+//IDENTIFIER : [a-zA-Z] ([a-zA-Z]|('0'..'9')|'_'|'.')* ;
 
 
 
