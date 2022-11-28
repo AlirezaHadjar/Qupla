@@ -11,9 +11,9 @@ SEPARATOR: ';';
 
 TXT : '"' .*? '"';
 
-INT : ('0'..'9')+ ;
-HEX :  '0' ('x'|'X') ('0'..'9'|'a'..'f'|'A'..'F')+ ;
-FLOAT: [0-9]+'.'[0-9]+;
+REAL_INT : ('0'..'9')+ ;
+REAL_HEX :  '0' ('x'|'X') ('0'..'9'|'a'..'f'|'A'..'F')+ ;
+REAL_FLOAT: [0-9]+'.'[0-9]+;
 
 // one line comments
 ONCOMMENT: '%%' ~[\r\n]*;

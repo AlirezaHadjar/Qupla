@@ -2,12 +2,9 @@ import lexer.vocabulary;
 import org.antlr.v4.runtime.*;
 
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Scanner;
 import java.io.FileNotFoundException;
 
 public class Main {
@@ -29,6 +26,8 @@ public class Main {
         while (!lexer._hitEOF) {
             Token token = lexer.nextToken();
             int type = token.getType();
+            if (type == Token.EOF) break;
+
             String typeName = vocabulary.VOCABULARY.getSymbolicName(type);
             System.out.println(typeName);
         }
