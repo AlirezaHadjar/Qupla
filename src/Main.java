@@ -24,12 +24,19 @@ public class Main {
         vocabulary lexer = new vocabulary(in);
 
         while (!lexer._hitEOF) {
-            Token token = lexer.nextToken();
-            int type = token.getType();
-            if (type == Token.EOF) break;
+            try {
+                Token token = lexer.nextToken();
+                int type = token.getType();
+                String tokenText = token.getText();
+                if (type == Token.EOF) break;
+                if (tokenText.length() > 32)
+                    throw new RuntimeException("Token length is greater than 32 characters" + " at line " + token.getLine() + " and column " + token.getCharPositionInLine());
 
-            String typeName = vocabulary.VOCABULARY.getSymbolicName(type);
-            System.out.println(typeName);
+                String typeName = vocabulary.VOCABULARY.getSymbolicName(type);
+                System.out.println(typeName);
+            } catch (RuntimeException e) {
+                System.out.println(e.getMessage());
+            }
         }
 
     }
