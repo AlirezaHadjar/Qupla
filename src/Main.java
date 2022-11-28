@@ -17,20 +17,19 @@ public class Main {
         try {
             String currentDirectory = System.getProperty("user.dir");
             String inputFileName = currentDirectory+"/src/"+ "InputFile.QUPLA";
-            text = Files.readString(Paths.get(inputFileName));
+            text = Files.readString(Paths.get(inputFileName)).trim();
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
 
-//        String text = "Bool ali = false ;";
         CharStream in = CharStreams.fromString(text);
         vocabulary lexer = new vocabulary(in);
 
         while (!lexer._hitEOF) {
             Token token = lexer.nextToken();
             int type = token.getType();
-            String typeName = lexer.VOCABULARY.getSymbolicName(type);
+            String typeName = vocabulary.VOCABULARY.getSymbolicName(type);
             System.out.println(typeName);
         }
 
