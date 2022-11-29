@@ -51,7 +51,7 @@ REMAIN : '%';
 
 COND_IF : '?';
 
-COND_ELSE : ':';
+COLON : ':';
 
 EQUAL : '==';
 
