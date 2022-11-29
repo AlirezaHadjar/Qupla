@@ -97,8 +97,83 @@ INPUT : [iI][nN][pP][uU][tT];
 
 OUTPUT : [oO][uU][tT][pP][uU][tT];
 
+
+FOR: [fF][oO][rR] ;
+
+CLASS: [cC][lL][aA][sS][sS] ;
+
+CONSTRUCTOR: [cC][oO][nN][sS][tT][rR][uU][cC][tT][oO][rR] ;
+
+DESTRUCTOR: [dD][eE][sS][tT][rR][uU][cC][tT][oO][rR] ;
+
+BREAK: [bB][rR][eE][aA][kK] ;
+
+CONTINUE: [cC][oO][nN][tT][iI][nN][uU][eE] ;
+
+SWITCH: [sS][wW][iI][tT][cC][hH] ;
+
+CASE: [cC][aA][sS][eE] ;
+
+PROTECTED: [pP][rR][oO][tT][eE][cC][tT][eE][dD] ;
+
+PRIVATE: [pP][rR][iI][vV][aA][tT][eE] ;
+
+PUBLIC: [pP][uU][bB][lL][iI][cC] ;
+
+THIS: [tT][hH][iI][sS] ;
+
+RETURN: [rR][eE][tT][uU][rR][nN] ;
+
+TRY: [tT][rR][yY] ;
+
+CATCH: [cC][aA][tT][cC][hH] ;
+
+FINALLY: [fF][iI][nN][aA][lL][lL][yY] ;
+
+THROW: [tT][hH][rR][oO][wW] ;
+
+NEW: [nN][eE][wW] ;
+
+DELETE: [dD][eE][lL][eE][tT][eE] ;
+
+INCLUDE: [iI][nN][cC][lL][uU][dD][eE] ;
+
+USING: [uU][sS][iI][nN][gG] ;
+
+NAMESPACE: [nN][aA][mM][eE][sS][pP][aA][cC][eE] ;
+
+IMPORT: [iI][mM][pP][oO][rR][tT] ;
+
+EXTENDS: [eE][xX][tT][eE][nN][dD][sS] ;
+
+INTERFACE: [iI][nN][tT][eE][rR][fF][aA][cC][eE] ;
+
+ENUM: [eE][nN][uU][mM] ;
+
+STATIC: [sS][tT][aA][tT][iI][cC] ;
+
+ABSTRACT: [aA][bB][sS][tT][rR][aA][cC][tT] ;
+
+FINAL: [fF][iI][nN][aA][lL] ;
+
+CONST: [cC][oO][nN][sS][tT] ;
+
+DO: [dD][oO] ;
+
+DEFAULT: [dD][eE][fF][aA][uU][lL][tT] ;
+
+IMPLEMENTS: [iI][mM][pP][lL][eE][mM][eE][nN][tT][sS] ;
+
+SUPER: [sS][uU][pP][eE][rR] ;
+
+THROWS: [tT][hH][rR][oO][wW][sS] ;
+
+VOID: [vV][oO][iI][dD] ;
+
 //identifier
 IDENTIFIER : [a-zA-Z] ([a-zA-Z]|('0'..'9')|'_'|'.')* ;
+
+
 
 
 
