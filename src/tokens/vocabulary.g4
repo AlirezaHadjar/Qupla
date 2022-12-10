@@ -1,5 +1,6 @@
-lexer grammar vocabulary;
+grammar vocabulary;
 
+//lexer part
 //data types in case sensitive
 REAL : [rR][eE][aA][lL] ;
 
@@ -31,7 +32,7 @@ MINUS : '-';
 
 MULT : '*';
 
-Div : '/';
+DIV : '/';
 
 POW : '^';
 
@@ -174,7 +175,14 @@ VOID: [vV][oO][iI][dD] ;
 IDENTIFIER : [a-zA-Z] ([a-zA-Z]|('0'..'9')|'_'|'.')* ;
 
 
+// parser part
+variableDeclarator
+    :   IDENTIFIER COLON REAL SEPARATOR| IDENTIFIER COLON BOOL SEPARATOR| IDENTIFIER COLON STRING SEPARATOR  ;
 
+assign : IDENTIFIER ASSIGN exp;
 
+//not completed
+exp : IDENTIFIER | REAL | STRING | BOOL;
 
+op : PLUS | MINUS | REMAIN | DIV | POW | MULT ;
 
