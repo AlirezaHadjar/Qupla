@@ -185,11 +185,14 @@ stat
  | ifCondition
  | variableDeclarator
  | whileLoop
+ | write
+ | read
+ | returnValue
  | OTHER {System.err.println("unknown char: " + $OTHER.text);}
  ;
 
 variableDeclarator
-    : IDENTIFIER COLON REAL SEPARATOR| IDENTIFIER COLON BOOL SEPARATOR| IDENTIFIER COLON STRING SEPARATOR ;
+    : IDENTIFIER COLON (REAL | BOOL | STRING) SEPARATOR ;
 
 assign : IDENTIFIER ASSIGN boolExp SEPARATOR | IDENTIFIER ASSIGN textExp SEPARATOR | IDENTIFIER ASSIGN mathExp SEPARATOR ;
 
@@ -214,3 +217,6 @@ whileLoop : WHILE PARENTHESIS_OPEN boolExp PARENTHESIS_CLOSE codeBlock ;
 
 codeBlock : stat* ;
 
+createModule : MODULE IDENTIFIER INPUT COLON (IDENTIFIER)* SEPARATOR OUTPUT COLON (REAL | BOOL | STRING) BEGIN codeBlock END ;
+
+returnValue : RETURN (mathExp | boolExp | textExp) ;
