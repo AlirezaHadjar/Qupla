@@ -187,7 +187,6 @@ stat
  | whileLoop
  | write
  | read
- | returnValue
  | OTHER {System.err.println("unknown char: " + $OTHER.text);}
  ;
 
@@ -217,6 +216,6 @@ whileLoop : WHILE PARENTHESIS_OPEN boolExp PARENTHESIS_CLOSE codeBlock ;
 
 codeBlock : stat* ;
 
-createModule : MODULE IDENTIFIER INPUT COLON (IDENTIFIER)* SEPARATOR OUTPUT COLON (REAL | BOOL | STRING) BEGIN codeBlock END ;
+createModule : MODULE IDENTIFIER INPUT COLON (IDENTIFIER)* SEPARATOR OUTPUT COLON (REAL | BOOL | STRING) BEGIN codeBlock returnValue? END ;
 
 returnValue : RETURN (mathExp | boolExp | textExp) ;
