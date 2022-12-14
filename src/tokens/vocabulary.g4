@@ -183,6 +183,8 @@ OTHER : . ;
 stat
  : assign
  | ifCondition
+ | variableDeclarator
+ | whileLoop
  | OTHER {System.err.println("unknown char: " + $OTHER.text);}
  ;
 
@@ -204,6 +206,11 @@ read : READ IDENTIFIER boolExp SEPARATOR | READ IDENTIFIER  textExp SEPARATOR | 
 
 write : WRITE boolExp SEPARATOR | WRITE textExp SEPARATOR | WRITE mathExp SEPARATOR;
 
-ifCondition : IF PARENTHESIS_OPEN boolExp PARENTHESIS_CLOSE THEN codeBlock ;
+//not complete
+ifCondition : IF PARENTHESIS_OPEN boolExp PARENTHESIS_CLOSE THEN codeBlock (ELSE boolExp)? codeBlock;
+
+//not complete
+whileLoop : WHILE PARENTHESIS_OPEN boolExp PARENTHESIS_CLOSE codeBlock ;
 
 codeBlock : stat* ;
+
