@@ -1,5 +1,6 @@
-lexer grammar vocabulary;
+grammar vocabulary;
 
+//lexer part
 //data types in case sensitive
 REAL : [rR][eE][aA][lL] ;
 
@@ -31,7 +32,7 @@ MINUS : '-';
 
 MULT : '*';
 
-Div : '/';
+DIV : '/';
 
 POW : '^';
 
@@ -173,8 +174,48 @@ VOID: [vV][oO][iI][dD] ;
 //identifier
 IDENTIFIER : [a-zA-Z] ([a-zA-Z]|('0'..'9')|'_'|'.')* ;
 
+//error handling
+OTHER : . ;
 
+// parser part
 
+//not completed
+stat
+ : assign
+ | ifCondition
+ | variableDeclarator
+ | whileLoop
+ | write
+ | read
+ | OTHER {System.err.println("unknown char: " + $OTHER.text);}
+ ;
 
+variableDeclarator
+    : IDENTIFIER COLON (REAL | BOOL | STRING) SEPARATOR ;
 
+assign : IDENTIFIER ASSIGN boolExp SEPARATOR | IDENTIFIER ASSIGN textExp SEPARATOR | IDENTIFIER ASSIGN mathExp SEPARATOR ;
 
+boolExp : TRUE | FALSE ;
+
+textExp : TXT | textExp PLUS textExp ;
+
+//not complete
+mathExp : REAL_FLOAT | REAL_HEX | REAL_INT | PARENTHESIS_OPEN mathExp PARENTHESIS_CLOSE | mathExp op mathExp;
+
+op : PLUS | MINUS | REMAIN | DIV | POW | MULT ;
+
+read : READ IDENTIFIER boolExp SEPARATOR | READ IDENTIFIER  textExp SEPARATOR | READ IDENTIFIER  mathExp SEPARATOR ;
+
+write : WRITE boolExp SEPARATOR | WRITE textExp SEPARATOR | WRITE mathExp SEPARATOR;
+
+//not complete
+ifCondition : IF PARENTHESIS_OPEN boolExp PARENTHESIS_CLOSE THEN codeBlock (ELSE boolExp)? codeBlock;
+
+//not complete
+whileLoop : WHILE PARENTHESIS_OPEN boolExp PARENTHESIS_CLOSE codeBlock ;
+
+codeBlock : stat* ;
+
+createModule : MODULE IDENTIFIER INPUT COLON (IDENTIFIER)* SEPARATOR OUTPUT COLON (REAL | BOOL | STRING) BEGIN codeBlock returnValue? END ;
+
+returnValue : RETURN (mathExp | boolExp | textExp) ;
