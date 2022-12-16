@@ -1,5 +1,6 @@
-import lexer.vocabulary;
+import lexer.vocabularyLexer;
 import org.antlr.v4.runtime.*;
+import parser.vocabularyParser;
 
 
 import java.io.IOException;
@@ -13,7 +14,7 @@ public class Main {
         String text = "";
         try {
             String currentDirectory = System.getProperty("user.dir");
-            String inputFileName = currentDirectory+"/src/"+ "InputFile.QUPLA";
+            String inputFileName = currentDirectory+"/src/"+ "4.qupla";
             text = Files.readString(Paths.get(inputFileName)).trim();
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
@@ -21,23 +22,24 @@ public class Main {
         }
 
         CharStream in = CharStreams.fromString(text);
-        vocabulary lexer = new vocabulary(in);
+        vocabularyLexer lexer = new vocabularyLexer(in);
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+        vocabularyParser parser = new vocabularyParser(tokens);
+        parser.stat();
 
-        while (!lexer._hitEOF) {
-            try {
-                Token token = lexer.nextToken();
-                int type = token.getType();
-                String tokenText = token.getText();
-                if (type == Token.EOF) break;
-                if (tokenText.length() > 32)
-                    throw new RuntimeException("Token length is greater than 32 characters" + " at line " + token.getLine() + " and column " + token.getCharPositionInLine());
-
-                String typeName = vocabulary.VOCABULARY.getSymbolicName(type);
-                System.out.println(typeName);
-            } catch (RuntimeException e) {
-                System.out.println(e.getMessage());
-            }
-        }
+//        while (!lexer._hitEOF) {
+//            try {
+//                Token token = lexer.nextToken();
+//                int type = token.getType();
+//                String tokenText = token.getText();
+//                if (type == Token.EOF) break;
+//
+//                String typeName = vocabularyLexer.VOCABULARY.getSymbolicName(type);
+//                System.out.println(typeName + " -- " + tokenText);
+//            } catch (RuntimeException e) {
+//                System.out.println(e.getMessage());
+//            }
+//        }
 
     }
 }

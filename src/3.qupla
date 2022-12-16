@@ -1,0 +1,11 @@
+module% main
+input:
+	X:real;
+output:real;
+begin
+	if x> 0 then
+	begin 
+		#return Func(x-1)+func(x-2);
+	end
+	return 1;
+end

@@ -1,0 +1,6 @@
+module main
+begin
+%% Error no ending qutation
+		x= "amir
+		write x;
+end
