@@ -7,6 +7,16 @@ import org.antlr.v4.runtime.tree.ParseTreeListener;
  */
 public interface vocabularyListener extends ParseTreeListener {
 	/**
+	 * Enter a parse tree produced by {@link vocabularyParser#comment}.
+	 * @param ctx the parse tree
+	 */
+	void enterComment(vocabularyParser.CommentContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link vocabularyParser#comment}.
+	 * @param ctx the parse tree
+	 */
+	void exitComment(vocabularyParser.CommentContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link vocabularyParser#stat}.
 	 * @param ctx the parse tree
 	 */
@@ -16,6 +26,16 @@ public interface vocabularyListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitStat(vocabularyParser.StatContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link vocabularyParser#end}.
+	 * @param ctx the parse tree
+	 */
+	void enterEnd(vocabularyParser.EndContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link vocabularyParser#end}.
+	 * @param ctx the parse tree
+	 */
+	void exitEnd(vocabularyParser.EndContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link vocabularyParser#variableDeclarator}.
 	 * @param ctx the parse tree
@@ -57,15 +77,45 @@ public interface vocabularyListener extends ParseTreeListener {
 	 */
 	void exitTextExp(vocabularyParser.TextExpContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link vocabularyParser#op}.
+	 * Enter a parse tree produced by {@link vocabularyParser#mathOp}.
 	 * @param ctx the parse tree
 	 */
-	void enterOp(vocabularyParser.OpContext ctx);
+	void enterMathOp(vocabularyParser.MathOpContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link vocabularyParser#op}.
+	 * Exit a parse tree produced by {@link vocabularyParser#mathOp}.
 	 * @param ctx the parse tree
 	 */
-	void exitOp(vocabularyParser.OpContext ctx);
+	void exitMathOp(vocabularyParser.MathOpContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link vocabularyParser#logicalOp}.
+	 * @param ctx the parse tree
+	 */
+	void enterLogicalOp(vocabularyParser.LogicalOpContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link vocabularyParser#logicalOp}.
+	 * @param ctx the parse tree
+	 */
+	void exitLogicalOp(vocabularyParser.LogicalOpContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link vocabularyParser#compareOp}.
+	 * @param ctx the parse tree
+	 */
+	void enterCompareOp(vocabularyParser.CompareOpContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link vocabularyParser#compareOp}.
+	 * @param ctx the parse tree
+	 */
+	void exitCompareOp(vocabularyParser.CompareOpContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link vocabularyParser#value}.
+	 * @param ctx the parse tree
+	 */
+	void enterValue(vocabularyParser.ValueContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link vocabularyParser#value}.
+	 * @param ctx the parse tree
+	 */
+	void exitValue(vocabularyParser.ValueContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link vocabularyParser#mathExp}.
 	 * @param ctx the parse tree
@@ -127,6 +177,26 @@ public interface vocabularyListener extends ParseTreeListener {
 	 */
 	void exitCodeBlock(vocabularyParser.CodeBlockContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link vocabularyParser#moduleInput}.
+	 * @param ctx the parse tree
+	 */
+	void enterModuleInput(vocabularyParser.ModuleInputContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link vocabularyParser#moduleInput}.
+	 * @param ctx the parse tree
+	 */
+	void exitModuleInput(vocabularyParser.ModuleInputContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link vocabularyParser#moduleOutput}.
+	 * @param ctx the parse tree
+	 */
+	void enterModuleOutput(vocabularyParser.ModuleOutputContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link vocabularyParser#moduleOutput}.
+	 * @param ctx the parse tree
+	 */
+	void exitModuleOutput(vocabularyParser.ModuleOutputContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link vocabularyParser#createModule}.
 	 * @param ctx the parse tree
 	 */
@@ -146,4 +216,14 @@ public interface vocabularyListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitReturnValue(vocabularyParser.ReturnValueContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link vocabularyParser#callModule}.
+	 * @param ctx the parse tree
+	 */
+	void enterCallModule(vocabularyParser.CallModuleContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link vocabularyParser#callModule}.
+	 * @param ctx the parse tree
+	 */
+	void exitCallModule(vocabularyParser.CallModuleContext ctx);
 }

@@ -1,7 +1,4 @@
-import lexer.vocabularyLexer;
 import org.antlr.v4.runtime.*;
-import parser.vocabularyParser;
-
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -14,7 +11,7 @@ public class Main {
         String text = "";
         try {
             String currentDirectory = System.getProperty("user.dir");
-            String inputFileName = currentDirectory+"/src/"+ "4.qupla";
+            String inputFileName = currentDirectory+"/src/"+ "inputFile.qupla";
             text = Files.readString(Paths.get(inputFileName)).trim();
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");

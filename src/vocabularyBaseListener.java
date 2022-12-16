@@ -16,6 +16,18 @@ public class vocabularyBaseListener implements vocabularyListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterComment(vocabularyParser.CommentContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitComment(vocabularyParser.CommentContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterStat(vocabularyParser.StatContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -23,6 +35,18 @@ public class vocabularyBaseListener implements vocabularyListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitStat(vocabularyParser.StatContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterEnd(vocabularyParser.EndContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitEnd(vocabularyParser.EndContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -76,13 +100,49 @@ public class vocabularyBaseListener implements vocabularyListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterOp(vocabularyParser.OpContext ctx) { }
+	@Override public void enterMathOp(vocabularyParser.MathOpContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitOp(vocabularyParser.OpContext ctx) { }
+	@Override public void exitMathOp(vocabularyParser.MathOpContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterLogicalOp(vocabularyParser.LogicalOpContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLogicalOp(vocabularyParser.LogicalOpContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCompareOp(vocabularyParser.CompareOpContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCompareOp(vocabularyParser.CompareOpContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterValue(vocabularyParser.ValueContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitValue(vocabularyParser.ValueContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -160,6 +220,30 @@ public class vocabularyBaseListener implements vocabularyListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterModuleInput(vocabularyParser.ModuleInputContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitModuleInput(vocabularyParser.ModuleInputContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterModuleOutput(vocabularyParser.ModuleOutputContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitModuleOutput(vocabularyParser.ModuleOutputContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterCreateModule(vocabularyParser.CreateModuleContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -179,6 +263,18 @@ public class vocabularyBaseListener implements vocabularyListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitReturnValue(vocabularyParser.ReturnValueContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCallModule(vocabularyParser.CallModuleContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCallModule(vocabularyParser.CallModuleContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
