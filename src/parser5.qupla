@@ -1,0 +1,6 @@
+module main
+begin
+	%% this line has error
+	i=20 40 50 60;
+	write(func(i));
+end

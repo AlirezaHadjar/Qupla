@@ -1,0 +1,7 @@
+module main
+begin
+	i:real;
+	%% this line has error
+	i=20
+	write(func(i));
+end

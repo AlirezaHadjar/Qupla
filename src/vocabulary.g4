@@ -16,19 +16,17 @@ TXT : '"' ~[\n]*? '"';
 
 REAL_INT : ('0'..'9')+ ;
 REAL_HEX :  '0' ('x'|'X') ('0'..'9'|'a'..'f'|'A'..'F')+ ;
-REAL_FLOAT: [0-9]*'.'[0-9]+;
+// float number with  optional number before and after dot
+REAL_FLOAT : (('0'..'9')* '.' ('0'..'9')+) | (('0'..'9')+ '.' ('0'..'9')*) ;
 
 // one line comments
-ONCOMMENT: '%%' ~[\r\n]*;
+ONCOMMENT: '%%' ~[\r\n]* -> skip;
 
 // multi line comments
-MLCOMMENT: '%%%' .*? '%%%';
-
-// code block limiter
-CODEBLOCK: '\n' [ ]+ ;
+MLCOMMENT: '%%%' .*? '%%%' -> skip;
 
 //white spaces
-WS : [ \n]+ -> skip;
+WS : [ \r\n\t]+ -> skip;
 
 //operators
 PLUS : '+';
@@ -117,7 +115,7 @@ OTHER : . ;
 
 // parser part
 
-comment: ONCOMMENT | MLCOMMENT;
+comment: ONCOMMENT | MLCOMMENT {System.out.println("comment");};
 
 compoundStat
  :
@@ -125,7 +123,6 @@ compoundStat
  | ifCondition
  | whileLoop
  | createModule
- | OTHER {System.err.println("unknown char: " + $OTHER.text);}
  ;
 
  simpleStat:
@@ -135,7 +132,10 @@ compoundStat
     | read
     | callModule SEPARATOR;
 
- stat: compoundStat | simpleStat;
+ stat:
+  compoundStat
+ | simpleStat
+ | OTHER {System.err.println("unknown char: " + $OTHER.text);};
 
 end : stat EOF ;
 
@@ -148,7 +148,7 @@ assign : IDENTIFIER ASSIGN (boolExp | textExp | mathExp) SEPARATOR;
 
 boolExp: boolExp (logicalOp | compareOp) boolExp | NOT boolExp | PARENTHESIS_OPEN boolExp PARENTHESIS_CLOSE | TRUE | FALSE | IDENTIFIER | callModule | REAL_INT ;
 
-textExp : TXT | textExp PLUS textExp ;
+textExp : TXT | textExp PLUS textExp | PARENTHESIS_OPEN textExp PARENTHESIS_CLOSE | callModule ;
 
 mathOp: PLUS | MINUS | MULT | DIV | POW ;
 logicalOp: AND | OR | XOR ;
@@ -156,9 +156,9 @@ compareOp: EQUAL | GREATER | LESS | GREQUAL | LEEQUAL | NOTEQUAL ;
 
 mathExp : REAL_FLOAT | REAL_HEX | REAL_INT | PARENTHESIS_OPEN mathExp PARENTHESIS_CLOSE | mathExp mathOp mathExp | callModule | IDENTIFIER {System.out.println("mathExp" + " " + $mathExp.text);};
 
-read : READ IDENTIFIER (boolExp | mathExp | textExp | callModule | IDENTIFIER) SEPARATOR {System.out.println("Read");};
+read : READ IDENTIFIER SEPARATOR {System.out.println("Read");};
 
-write : WRITE (boolExp | mathExp | textExp | callModule | IDENTIFIER) SEPARATOR {System.out.println("Write");};
+write : WRITE textExp SEPARATOR {System.out.println("Write");};
 
 //not complete
 ifCondition : IF (boolExp | textExp | mathExp) THEN codeBlock (ELSE codeBlock)? {System.out.println("IF statement");};
@@ -166,18 +166,16 @@ ifCondition : IF (boolExp | textExp | mathExp) THEN codeBlock (ELSE codeBlock)? 
 //not complete
 whileLoop : WHILE (boolExp | textExp | mathExp)  codeBlock ;
 
-codeBlock : CODEBLOCK (CODEBLOCK|stat)* {System.out.println("Code Block");};
+codeBlock :
+ BEGIN (stat | returnValue)*? END {System.out.println("Code Block");};
 
-moduleInput: (INPUT COLON (variableDeclarator)*)? {System.out.println("Module Input");};
+moduleInput: (INPUT COLON (variableDeclarator)+)? {System.out.println("Module Input");};
 moduleOutput: (OUTPUT COLON (REAL | BOOL | STRING) SEPARATOR)? {System.out.println("Module Output");};
 
 createModule : MODULE IDENTIFIER
  moduleInput
  moduleOutput
- BEGIN
  codeBlock
- returnValue*
- END
  {System.out.println("Create Module");};
 
 returnValue : RETURN (mathExp | boolExp | textExp) SEPARATOR {System.out.println("Return a value");};

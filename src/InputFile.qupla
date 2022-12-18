@@ -1,7 +1,0 @@
-Module F Input: X:real; Output: real;
-Begin
-    x = 1;
-    If x > 0 then
-        Return f(x-1)+f(x-2);
-Return 1;
-End

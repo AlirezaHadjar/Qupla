@@ -1,0 +1,5 @@
+module main
+begin
+	%% following line has error
+	read i*20;
+end

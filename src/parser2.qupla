@@ -1,0 +1,17 @@
+%%%This is a sample Written in QUPLA $
+@The program compute fibonacci serie%%%
+%% line 6: Integer is not a type
+module func
+input:
+	X:integer; 
+output:real;
+begin
+	return 1;
+end
+%% This is the main module &%*&()
+module main
+begin
+	i:real;
+	i=20;
+	write(func(i));
+end
