@@ -1,5 +1,7 @@
 grammar vocabulary;
 
+tokens { INDENT, DEDENT }
+
 //lexer part
 //data types in case sensitive
 REAL : [rR][eE][aA][lL] ;
@@ -22,8 +24,11 @@ ONCOMMENT: '%%' ~[\r\n]*;
 // multi line comments
 MLCOMMENT: '%%%' .*? '%%%';
 
+// code block limiter
+CODEBLOCK: '\n' [ ]+ ;
+
 //white spaces
-WS : [ \t\r\n]+ -> skip;
+WS : [ \n]+ -> skip;
 
 //operators
 PLUS : '+';
@@ -72,6 +77,8 @@ PARENTHESIS_CLOSE: ')';
 
 COMMA : ',';
 
+NEWLINE: '\r'? '\n';
+
 //constant values
 TRUE : [tT][rR][uU][eE];
 
@@ -112,31 +119,34 @@ OTHER : . ;
 
 comment: ONCOMMENT | MLCOMMENT;
 
-//not completed yet: should textExp or mathExp or boolExp be here or not?
-stat
- : assign
- | comment
+compoundStat
+ :
+   comment
  | ifCondition
- | mathExp
- | boolExp
- | variableDeclarator
  | whileLoop
- | write
- | read
- | callModule SEPARATOR
  | createModule
- | textExp
  | OTHER {System.err.println("unknown char: " + $OTHER.text);}
  ;
+
+ simpleStat:
+     assign
+    | variableDeclarator
+    | write
+    | read
+    | callModule SEPARATOR;
+
+ stat: compoundStat | simpleStat;
 
 end : stat EOF ;
 
 variableDeclarator
     : IDENTIFIER COLON (REAL | BOOL | STRING) SEPARATOR {System.out.println("variableDeclarator");};
 
-assign : IDENTIFIER ASSIGN boolExp SEPARATOR | IDENTIFIER ASSIGN textExp SEPARATOR | IDENTIFIER ASSIGN mathExp SEPARATOR ;
+callModule : IDENTIFIER PARENTHESIS_OPEN (IDENTIFIER | mathExp | boolExp | textExp | callModule) PARENTHESIS_CLOSE {System.out.println("Call Module");};
 
-boolExp: boolExp (logicalOp | compareOp) boolExp | boolExp (logicalOp | compareOp) mathExp | boolExp (logicalOp | compareOp) value | mathExp (logicalOp | compareOp) boolExp | mathExp (logicalOp | compareOp) mathExp | mathExp (logicalOp | compareOp) value | value (logicalOp | compareOp) boolExp | value (logicalOp | compareOp) mathExp | value (logicalOp | compareOp) value | NOT boolExp | PARENTHESIS_OPEN boolExp PARENTHESIS_CLOSE | TRUE | FALSE ;
+assign : IDENTIFIER ASSIGN (boolExp | textExp | mathExp) SEPARATOR;
+
+boolExp: boolExp (logicalOp | compareOp) boolExp | NOT boolExp | PARENTHESIS_OPEN boolExp PARENTHESIS_CLOSE | TRUE | FALSE | IDENTIFIER | callModule | REAL_INT ;
 
 textExp : TXT | textExp PLUS textExp ;
 
@@ -144,21 +154,19 @@ mathOp: PLUS | MINUS | MULT | DIV | POW ;
 logicalOp: AND | OR | XOR ;
 compareOp: EQUAL | GREATER | LESS | GREQUAL | LEEQUAL | NOTEQUAL ;
 
-value: IDENTIFIER | callModule;
+mathExp : REAL_FLOAT | REAL_HEX | REAL_INT | PARENTHESIS_OPEN mathExp PARENTHESIS_CLOSE | mathExp mathOp mathExp | callModule | IDENTIFIER {System.out.println("mathExp" + " " + $mathExp.text);};
 
-mathExp : REAL_FLOAT | REAL_HEX | REAL_INT | PARENTHESIS_OPEN mathExp PARENTHESIS_CLOSE | mathExp mathOp mathExp | value mathOp mathExp | mathExp mathOp value | value mathOp value ;
+read : READ IDENTIFIER (boolExp | mathExp | textExp | callModule | IDENTIFIER) SEPARATOR {System.out.println("Read");};
 
-read : READ IDENTIFIER (boolExp | mathExp | textExp | callModule | IDENTIFIER) SEPARATOR;
-
-write : WRITE (boolExp | mathExp | textExp | callModule | IDENTIFIER) SEPARATOR ;
+write : WRITE (boolExp | mathExp | textExp | callModule | IDENTIFIER) SEPARATOR {System.out.println("Write");};
 
 //not complete
-ifCondition : IF (boolExp | textExp | mathExp) THEN codeBlock (ELSE codeBlock)?;
+ifCondition : IF (boolExp | textExp | mathExp) THEN codeBlock (ELSE codeBlock)? {System.out.println("IF statement");};
 
 //not complete
-whileLoop : WHILE boolExp codeBlock ;
+whileLoop : WHILE (boolExp | textExp | mathExp)  codeBlock ;
 
-codeBlock : stat* {System.out.println("Code Block");};
+codeBlock : CODEBLOCK (CODEBLOCK|stat)* {System.out.println("Code Block");};
 
 moduleInput: (INPUT COLON (variableDeclarator)*)? {System.out.println("Module Input");};
 moduleOutput: (OUTPUT COLON (REAL | BOOL | STRING) SEPARATOR)? {System.out.println("Module Output");};
@@ -168,10 +176,8 @@ createModule : MODULE IDENTIFIER
  moduleOutput
  BEGIN
  codeBlock
- returnValue?
+ returnValue*
  END
  {System.out.println("Create Module");};
 
-returnValue : RETURN (IDENTIFIER | mathExp | boolExp | textExp | callModule) SEPARATOR {System.out.println("Return a value");};
-
-callModule : IDENTIFIER PARENTHESIS_OPEN (IDENTIFIER | mathExp | boolExp | textExp | callModule) PARENTHESIS_CLOSE {System.out.println("Call Module");};
+returnValue : RETURN (mathExp | boolExp | textExp) SEPARATOR {System.out.println("Return a value");};
