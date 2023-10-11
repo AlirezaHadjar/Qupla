@@ -1,0 +1,10 @@
+module main
+begin
+	i:real;
+	read i;
+	%% error
+module main
+begin
+	i:real;
+end
+end

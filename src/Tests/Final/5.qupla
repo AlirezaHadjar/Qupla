@@ -1,0 +1,12 @@
+module main
+begin
+	if x % 0 == 0 then
+	begin 
+		return Func(x-1)+func(x-2);
+%% this line has error
+		if x<100 then
+	end
+	begin
+	return 1;
+	end
+end

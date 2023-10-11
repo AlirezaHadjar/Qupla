@@ -1,0 +1,8 @@
+module func
+begin
+	write(func(i));
+end
+%% error: there is a module without id
+begin
+		read func;
+end

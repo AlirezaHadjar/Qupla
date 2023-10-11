@@ -1,0 +1,15 @@
+module main
+begin
+
+	if a + b then
+	begin 
+	%%error
+		else a = c-4;
+		if c<5 then
+		begin	
+			c(4);
+		end
+	end
+	
+			
+end

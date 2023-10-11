@@ -1,0 +1,21 @@
+%%%This is a sample Written in QUPLA $
+@The program compute fibonacci serie%%%
+module func
+input:
+	X:real;
+output:real;
+begin
+	if x> 0 then
+	begin 
+		return Func(x-1)+func(x-2);
+	end
+	begin
+	return 1;
+	end
+
+%% no end here
+module main
+begin
+	i:real;
+end
+%%% last %%%

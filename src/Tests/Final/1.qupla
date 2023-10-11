@@ -1,20 +1,23 @@
-%%%This is a sample Written in QUPLA $
-@The program compute fibonacci serie%%%
 module func
 input:
 	X:real;
 output:real;
 begin
 	if x> 0 then
-	begin 
-		return Func(x-1)+func(x-2);
+	begin
+		if y < x * a?b:f then
+			return Func(x-1)+x^5 and 4;
 	end
+	else
 	return 1;
 end
 %% This is the main module &%*&()
 module main
 begin
 	i:real;
-	i=20;
+	begin
+		read i;
+	end
+	while (i> 0)
 	write(func(i));
 end

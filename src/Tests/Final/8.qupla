@@ -1,0 +1,6 @@
+module main
+begin
+	i:real;
+end
+%%error code out of module
+return 1;

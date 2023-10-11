@@ -1,0 +1,9 @@
+%% line 3: input with no declaration
+module func
+input:
+begin
+	return x?a:b;
+end
+module main
+begin
+end

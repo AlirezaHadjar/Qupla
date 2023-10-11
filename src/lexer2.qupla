@@ -1,6 +1,0 @@
-module main
-begin
-	i=0x12.23;
-	i:real;
-	i=20...1;
-end

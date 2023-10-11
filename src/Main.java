@@ -11,7 +11,7 @@ public class Main {
         String text = "";
         try {
             String currentDirectory = System.getProperty("user.dir");
-            String inputFileName = currentDirectory+"/src/"+ "lexer2.qupla";
+            String inputFileName = currentDirectory+"/src/com/"+ "7.qupla";
             text = Files.readString(Paths.get(inputFileName)).trim();
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
@@ -22,21 +22,21 @@ public class Main {
         vocabularyLexer lexer = new vocabularyLexer(in);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         vocabularyParser parser = new vocabularyParser(tokens);
-//        parser.stat();
+        parser.stat();
 
-        while (!lexer._hitEOF) {
-            try {
-                Token token = lexer.nextToken();
-                int type = token.getType();
-                String tokenText = token.getText();
-                if (type == Token.EOF) break;
-
-                String typeName = vocabularyLexer.VOCABULARY.getSymbolicName(type);
-                System.out.println(typeName + " -- " + tokenText);
-            } catch (RuntimeException e) {
-                System.out.println(e.getMessage());
-            }
-        }
+//        while (!lexer._hitEOF) {
+//            try {
+//                Token token = lexer.nextToken();
+//                int type = token.getType();
+//                String tokenText = token.getText();
+//                if (type == Token.EOF) break;
+//
+//                String typeName = vocabularyLexer.VOCABULARY.getSymbolicName(type);
+//                System.out.println(typeName + " -- " + tokenText);
+//            } catch (RuntimeException e) {
+//                System.out.println(e.getMessage());
+//            }
+//        }
 
     }
 }

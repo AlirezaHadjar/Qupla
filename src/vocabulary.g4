@@ -117,27 +117,18 @@ OTHER : . ;
 
 comment: ONCOMMENT | MLCOMMENT {System.out.println("comment");};
 
-compoundStat
- :
-   comment
- | ifCondition
- | whileLoop
- | createModule
- ;
-
- simpleStat:
-     assign
-    | variableDeclarator
-    | write
-    | read
-    | callModule SEPARATOR;
-
  stat:
-  compoundStat
- | simpleStat
+  createModule
+ | variableDeclarator
+ | comment
  | OTHER {System.err.println("unknown char: " + $OTHER.text);};
 
+ inBlock:
+    ifCondition | whileLoop | variableDeclarator | callModule | assign | read | write;
+
 end : stat EOF ;
+
+ifThenElse: boolExp COND_IF (IDENTIFIER) COLON (IDENTIFIER);
 
 variableDeclarator
     : IDENTIFIER COLON (REAL | BOOL | STRING) SEPARATOR {System.out.println("variableDeclarator");};
@@ -154,7 +145,7 @@ mathOp: PLUS | MINUS | MULT | DIV | POW ;
 logicalOp: AND | OR | XOR ;
 compareOp: EQUAL | GREATER | LESS | GREQUAL | LEEQUAL | NOTEQUAL ;
 
-mathExp : REAL_FLOAT | REAL_HEX | REAL_INT | PARENTHESIS_OPEN mathExp PARENTHESIS_CLOSE | mathExp mathOp mathExp | callModule | IDENTIFIER {System.out.println("mathExp" + " " + $mathExp.text);};
+mathExp : REAL_FLOAT | REAL_HEX | REAL_INT | ifThenElse | PARENTHESIS_OPEN mathExp PARENTHESIS_CLOSE | mathExp mathOp mathExp | callModule | IDENTIFIER {System.out.println("mathExp" + " " + $mathExp.text);};
 
 read : READ IDENTIFIER SEPARATOR {System.out.println("Read");};
 
@@ -166,8 +157,10 @@ ifCondition : IF (boolExp | textExp | mathExp) THEN codeBlock (ELSE codeBlock)? 
 //not complete
 whileLoop : WHILE (boolExp | textExp | mathExp)  codeBlock ;
 
+simpleBlock: returnValue | assign | write | read | callModule | variableDeclarator;
+
 codeBlock :
- BEGIN (stat | returnValue)*? END {System.out.println("Code Block");};
+ (BEGIN (inBlock | returnValue | codeBlock)*? END )| simpleBlock {System.out.println("Code Block");};
 
 moduleInput: (INPUT COLON (variableDeclarator)+)? {System.out.println("Module Input");};
 moduleOutput: (OUTPUT COLON (REAL | BOOL | STRING) SEPARATOR)? {System.out.println("Module Output");};
